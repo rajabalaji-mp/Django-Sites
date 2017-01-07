@@ -1,0 +1,40 @@
+<!-- Created by RajaBalaji MP on 07/Jan/2017 -->
+{% load staticfiles %}
+<!DOCTYPE html>
+<head>
+<script src="{% static 'homepage/js/jquery-3.1.1.min.js' %}" type='text/javascript'></script>
+<script src="{% static 'homepage/js/bootstrap.js' %}" type='text/javascript'></script>
+<link href="{% static 'homepage/css/bootstrap.css' %}" rel='stylesheet'/>
+<title>Simple Photo Gallery</title>
+</head>
+<body>
+<div class='container'>
+<div class='col-md-12'>
+<div class='row well well-sm'>
+<h3>Simple Photo Gallery</h3>
+</div>
+    <div class='row'>
+        {% for p in photos %}
+{% if forloop.counter|divisibleby:5 %}
+        <div class='row'>
+            {% endif %}
+<div class='col-md-3'>
+<h4>{{ p.photo_caption }}</h4>
+<hr/>
+<img src={{ p.photo_file.url }} class='img-responsive'/>
+<br/>
+<div class='col-md-12 text-center'>
+<p>{{ p.photo_description }}</p>
+<a href={{ p.photo_file.url }} download class='btn btn-success'>Download</a>
+</div>
+</div><!--ends a photo column -->
+{% if forloop.counter|divisibleby:4 %}
+            </div>
+        <hr/>
+        {% endif %}
+        {% endfor %}
+        </div>
+</div>
+</div>
+</body>
+</html>
